@@ -1,0 +1,51 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gato Ninja</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu-screen" class="screen">
+    <h1>🐱 Gato Ninja</h1>
+    <button onclick="startGame()">Iniciar Jogo</button>
+    <button onclick="openCharacterSelect()">Selecionar Personagem</button>
+    <button onclick="exitGame()">Sair</button>
+    <p id="high-score-display">Recorde: 0</p>
+
+  </div>
+
+  <div id="character-screen" class="screen hidden">
+    <h2>Selecione seu Gato</h2>
+    <div id="character-options">
+      <button onclick="selectCharacter('default')">Gato Padrão</button>
+      <button onclick="selectCharacter('shadow')">Gato das Sombras</button>
+      <button onclick="selectCharacter('cyborg')">Gato Cyborg</button>
+      
+    </div>
+    <button onclick="backToMenu()">Voltar</button>
+  </div>
+
+  <canvas id="game-canvas" class="hidden" width="800" height="600"></canvas>
+
+  <!-- Botão de pausa sobreposto -->
+  <!-- <button id="pause-button" onclick="togglePause()">⏸</button> -->
+
+  <div id="gameover-screen" class="screen hidden">
+    <h2>Game Over</h2>
+    <p id="final-score">Score: 0</p>
+    <button onclick="restartGame()">Reiniciar</button>
+    <button onclick="backToMenuFromGameOver()">Voltar ao Menu</button>
+  </div>
+
+  <div id="pause-screen" class="screen hidden">
+    <h2>Jogo Pausado</h2>
+    <p>Pressione "P" para continuar</p>
+  </div>
+  
+  
+
+  <script src="game.js"></script>
+</body>
+</html>

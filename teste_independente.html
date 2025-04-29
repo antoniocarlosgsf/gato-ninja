@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gato Ninja Teste</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game-canvas" width="800" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let gravity = 0.5;
+    let groundLevel = 500;
+
+    class Player {
+      constructor() {
+        this.width = 50;
+        this.height = 50;
+        this.x = 100;
+        this.y = groundLevel - this.height;
+        this.velY = 0;
+        this.jumpForce = -12;
+        this.isJumping = false;
+      }
+
+      update() {
+        this.velY += gravity;
+        this.y += this.velY;
+
+        if (this.y + this.height >= groundLevel) {
+          this.y = groundLevel - this.height;
+          this.velY = 0;
+          this.isJumping = false;
+        }
+      }
+
+      jump() {
+        if (!this.isJumping) {
+          this.velY = this.jumpForce;
+          this.isJumping = true;
+        }
+      }
+
+      draw() {
+        ctx.fillStyle = 'orange';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
+    }
+
+    const player = new Player();
+
+    function gameLoop() {
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'green';
+      ctx.fillRect(0, groundLevel, canvas.width, canvas.height - groundLevel);
+
+      player.update();
+      player.draw();
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        player.jump();
+      }
+    });
+
+    gameLoop();
+  </script>
+</body>
+</html>
